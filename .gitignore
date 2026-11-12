@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.log
+.env
+.env.*
+!.env.example
+
+# Reference workspaces are kept locally for development context, not deployed.
+__參考資料/
+__參考資料2/
+
+# TypeScript emits these config artifacts during local builds.
+vite.config.js
+vite.config.d.ts
+vitest.config.js
+vitest.config.d.ts
