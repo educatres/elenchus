@@ -31,8 +31,16 @@ async function callOpenAICompatible(request: CompletionRequest, config: Provider
     const body = await response.json() as { choices?: { message?: { content?: string } }[] }
     const text = body.choices?.[0]?.message?.content
     if (!text) throw new Error('AI 回應沒有可讀取的內容。')
-    const raw = JSON.parse(text) as unknown
-    const parsed = turnResponseSchema.parse(raw)
+    const cleanedText = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '')
+    const raw = JSON.parse(cleanedText) as unknown
+    let parsed: ReturnType<typeof turnResponseSchema.parse>
+    try {
+      parsed = turnResponseSchema.parse(raw)
+    } catch {
+      // A model response is untrusted data. Never surface a raw Zod error to the learner;
+      // use a deterministic Socratic prompt that does not claim unsupported evidence.
+      return fallback(request.studentMessage, request.context, 1)
+    }
     const sourceChunkIds = parsed.sourceChunkIds.filter((id) => request.context.some((chunk) => chunk.id === id))
     const unsafeMarkup = /<script|javascript:|onerror\s*=|<iframe/i.test(parsed.assistantMessage)
     const likelyDirectAnswer = /答案是|完整解法|以下是你可以直接繳交|```(?:python|javascript|typescript|sql)/i.test(parsed.assistantMessage)

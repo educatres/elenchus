@@ -9,7 +9,7 @@
 - chatbot 風格三欄學習介面：教材引用、L0–L4 引導層級、提示按鈕、Enter 送出與學習歷程續談。
 - 離線示範 Mock Provider（明確標示，不假裝是真實 AI）、Gemini／CGU OpenAI-compatible adapter、API Key 測試與錯誤提示。
 - Dexie／IndexedDB 保存課程、教材、chunks、對話與報告；Provider／模型偏好才使用 localStorage。
-- API Key 只存在目前分頁的 React state，重新整理即清除，不會進入 DB、URL、log 或匯出檔。
+- API Key 預設只存在目前分頁的 React state；使用者可在設定頁勾選「記住此 Key」，將它保存於此瀏覽器的 localStorage。無論是否保存，都不會進入 DB、URL、log 或匯出檔。
 - 五項形成性評量、獨立總結／遷移題／反思收束、`not_assessed` 證據不足狀態、JSON／Markdown／列印 PDF 匯出。
 
 ## 開發
