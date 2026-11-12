@@ -7,6 +7,8 @@
 - React + TypeScript + Vite + `HashRouter`，支援 GitHub Pages `/elenchus/` 子路徑。
 - 課程、文字型 PDF／TXT／Markdown／直接貼上文字教材匯入，建立中文 2-gram／英文單字的本機檢索索引；PDF 保留頁碼引用，掃描 PDF 明確提示不支援 OCR。
 - chatbot 風格三欄學習介面：教材引用、L0–L4 引導層級、提示按鈕、Enter 送出與學習歷程續談。
+- 聊天訊息新增後自動捲至最底；學習進度固定在聊天左側。
+- 「學習歷程」會依教材主軸產生開場問題群組，點選問題即可直接建立並開始對話。
 - 離線示範 Mock Provider（明確標示，不假裝是真實 AI）、Gemini／CGU OpenAI-compatible adapter、API Key 測試與錯誤提示。
 - Dexie／IndexedDB 保存課程、教材、chunks、對話與報告；Provider／模型偏好才使用 localStorage。
 - API Key 預設只存在目前分頁的 React state；使用者可在設定頁勾選「記住此 Key」，將它保存於此瀏覽器的 localStorage。無論是否保存，都不會進入 DB、URL、log 或匯出檔。
